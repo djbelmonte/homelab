@@ -1,0 +1,15 @@
+<div class="w-full bg-white border border-gray-200 rounded-lg shadow p-4">
+  <h2 class="text-lg font-semibold mb-4">Actions</h2>
+  <div class="flex flex-col space-y-2">
+    <% actions.each do |action| %>
+      <%= button_to action[:path],
+                  method: action[:method] || :get,
+                  data: (action[:data] || {}).merge(confirm: action[:confirm]),
+                  title: action[:title],
+                  class: "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium #{action[:class] || 'bg-gray-100 hover:bg-gray-200 text-gray-800'}" do %>
+        <%= action[:icon] %>
+        <%= action[:label] %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
