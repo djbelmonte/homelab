@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Homelab" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
+    <title>Homelab</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload", media: "all", "data-turbo-track" => "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <header class="bg-blue-100 shadow">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center space-x-4">
+            <%= link_to root_path do %>
+              <%= image_tag "logo.png", alt: "Logo", class: "h-10 w-auto" %>
+            <% end %>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <% if user_signed_in? %>
+              <%= link_to "Dashboard", root_path, class: "text-blue-800 hover:underline" %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "text-blue-800 hover:underline" %>
+            <% else %>
+              <%= link_to "Log in", new_user_session_path, class: "text-blue-800 hover:underline" %>
+              <%= link_to "Sign up", new_user_registration_path, class: "text-blue-800 hover:underline" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Flash messages -->
+    <% flash.each do |type, message| %>
+      <div class="bg-<%= type == 'notice' ? 'green' : 'red' %>-100 text-<%= type == 'notice' ? 'green' : 'red' %>-800 p-4 text-sm text-center">
+        <%= message %>
+      </div>
+    <% end %>
+
+    <!-- Page Content -->
+    <main class="flex-1 px-4 sm:px-6 lg:px-8 py-6">
+      <%= yield %>
+    </main>
   </body>
 </html>
