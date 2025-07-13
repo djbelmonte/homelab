@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
 
   # POST /bookings or /bookings.json
   def create
-    @booking = Booking.new(booking_params)
+    @booking = Booking.new(booking_params.merge({status: "pending"}))
 
     respond_to do |format|
       if @booking.save
