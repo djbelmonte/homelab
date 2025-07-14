@@ -25,4 +25,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :bookings
+  resources :services
+  resources :institutions
 end

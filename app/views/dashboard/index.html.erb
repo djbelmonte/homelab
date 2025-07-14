@@ -8,6 +8,8 @@
         <p class="text-gray-600 mb-1"><strong>Status:</strong> <%= booking.status.capitalize %></p>
         <p class="text-gray-600 mb-1"><strong>Time:</strong> <%= booking.time.strftime("%B %d, %Y %I:%M %p") %></p>
         <p class="text-gray-600 mb-1"><strong>Address:</strong> <%= booking.address %></p>
+        <p class="text-gray-600 mb-1"><strong>Name:</strong> <%= booking.user.name %></p>
+        <p class="text-gray-600 mb-1"><strong>Order:</strong> <%= booking.orders.map{|order| order.service.name}.join(", ") %></p>
         <p class="text-gray-500 text-sm mt-3"><%= time_ago_in_words(booking.created_at) %> ago</p>
       </div>
     <% end %>

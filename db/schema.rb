@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_13_145430) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_13_155204) do
   create_table "bookings", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -31,6 +31,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_13_145430) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "booking_id", null: false
+    t.bigint "service_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_orders_on_booking_id"
+    t.index ["service_id"], name: "index_orders_on_service_id"
+  end
+
+  create_table "services", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "name"
     t.integer "age"
@@ -41,10 +57,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_13_145430) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer "user_id"
+    t.string "username"
+    t.bigint "institution_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["institution_id"], name: "index_users_on_institution_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "bookings", "users"
+  add_foreign_key "orders", "bookings"
+  add_foreign_key "orders", "services"
+  add_foreign_key "users", "institutions"
 end

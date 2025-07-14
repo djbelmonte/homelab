@@ -21,6 +21,10 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">User:</strong>
-    <%= booking.user_id %>
+    <%= booking.user.name %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">User:</strong>
+    <%= booking.orders.map{|order| order.service.name}.join(", ") %>
   </div>
 </div>
