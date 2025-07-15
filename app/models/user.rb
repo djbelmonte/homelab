@@ -7,4 +7,12 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
 
   belongs_to :institution, optional: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "email"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["bookings", "institution"]
+  end
 end

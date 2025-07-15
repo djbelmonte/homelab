@@ -1,11 +1,7 @@
 <div id="<%= dom_id booking %>" class="w-full sm:w-auto my-5 space-y-5">
   <div>
-    <strong class="block font-medium mb-1">Title:</strong>
-    <%= booking.title %>
-  </div>
-  <div>
-    <strong class="block font-medium mb-1">Description:</strong>
-    <%= booking.description %>
+    <strong class="block font-medium mb-1">Services:</strong>
+    <%= booking.orders.map{|order| order.service.name}.join(", ") %>
   </div>
   <div>
     <strong class="block font-medium mb-1">Status:</strong>
@@ -24,7 +20,7 @@
     <%= booking.user.name %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">User:</strong>
-    <%= booking.orders.map{|order| order.service.name}.join(", ") %>
+    <strong class="block font-medium mb-1">Notes:</strong>
+    <%= booking.notes %>
   </div>
 </div>

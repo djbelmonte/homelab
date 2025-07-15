@@ -1,0 +1,31 @@
+<div class="overflow-x-auto rounded shadow bg-white">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="bg-blue-50">
+      <tr>
+        <% columns.each do |label, field| %>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            <%= sort_link(q, field, label) %>
+          </th>
+        <% end %>
+        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody class="bg-white divide-y divide-gray-100">
+      <% rows.each do |row| %>
+        <tr>
+          <% row[:values].each do |value| %>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%= value %></td>
+          <% end %>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 space-x-2">
+            <% actions.each do |action| %>
+              <%= link_to action[:label], action[:path].call(row[:record]), class: "hover:underline" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= pagy_nav(@pagy).html_safe %>

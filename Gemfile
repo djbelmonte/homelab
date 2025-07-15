@@ -64,3 +64,5 @@ gem "tailwindcss-rails", "~> 4.3"
 
 gem "devise", "~> 4.9"
 gem 'jsbundling-rails'
+gem 'ransack'
+gem 'pagy'

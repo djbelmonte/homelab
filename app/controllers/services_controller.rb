@@ -3,7 +3,8 @@ class ServicesController < ApplicationController
 
   # GET /services or /services.json
   def index
-    @services = Service.all
+    @q = Service.ransack(params[:q])
+    @pagy, @services = pagy(@q.result, items: 10)
   end
 
   # GET /services/1 or /services/1.json

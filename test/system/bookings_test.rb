@@ -15,10 +15,9 @@ class BookingsTest < ApplicationSystemTestCase
     click_on "New booking"
 
     fill_in "Address", with: @booking.address
-    fill_in "Description", with: @booking.description
+    fill_in "Notes", with: @booking.notes
     fill_in "Status", with: @booking.status
     fill_in "Time", with: @booking.time
-    fill_in "Title", with: @booking.title
     fill_in "User", with: @booking.user_id
     click_on "Create Booking"
 
@@ -31,10 +30,9 @@ class BookingsTest < ApplicationSystemTestCase
     click_on "Edit this booking", match: :first
 
     fill_in "Address", with: @booking.address
-    fill_in "Description", with: @booking.description
+    fill_in "Notes", with: @booking.notes
     fill_in "Status", with: @booking.status
     fill_in "Time", with: @booking.time.to_s
-    fill_in "Title", with: @booking.title
     fill_in "User", with: @booking.user_id
     click_on "Update Booking"
 

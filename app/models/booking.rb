@@ -1,8 +1,9 @@
 class Booking < ApplicationRecord
   belongs_to :user
   has_many :orders
+  has_many :services, through: :orders
 
-  validates :title, :status, :time, :address, presence: true
+  validates :status, :time, :address, presence: true
 
   def booking_status_color
     case status.to_sym

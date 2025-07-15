@@ -1,29 +1,37 @@
 <% content_for :title, "Institutions" %>
 
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Institutions</h1>
-    <%= link_to "New institution", new_institution_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 block font-medium" %>
+<%= search_form_for @q, url: institutions_path, method: :get, class: "mb-4" do |f| %>
+  <div class="flex space-x-2">
+    <%= f.search_field :name_or_address_or_contact_number_cont, class: "w-full px-3 py-2 border rounded", placeholder: "Search institution..." %>
+    <%= f.submit "Search", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
   </div>
+<% end %>
 
-  <div id="institutions" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @institutions.any? %>
-      <% @institutions.each do |institution| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render institution %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", institution, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_institution_path(institution), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Destroy", institution, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      <% end %>
-    <% else %>
-      <p class="text-center my-10">No institutions found.</p>
-    <% end %>
-  </div>
+<div class="flex justify-between items-center mb-4">
+  <h1 class="text-2xl font-bold">Institutions</h1>
+  <%= link_to "New institution", new_institution_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 block font-medium text-white" %>
 </div>
+
+<%= render partial: "shared/table", locals: {
+  columns: {
+    "Name" => "name",
+    "Address" => "address",
+    "Contact Number" => "contact_number"
+  },
+  rows: @institutions.map { |institution|
+    {
+      record: institution,
+      values: [
+        institution.name,
+        institution.address,
+        institution.contact_number
+      ]
+    }
+  },
+  actions: [
+    { label: "Show", path: ->(i) { institution_path(i) } },
+    { label: "Edit", path: ->(i) { edit_institution_path(i) } }
+  ],
+  pagy: @pagy,
+  q: @q
+} %>

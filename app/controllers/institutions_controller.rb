@@ -3,7 +3,8 @@ class InstitutionsController < ApplicationController
 
   # GET /institutions or /institutions.json
   def index
-    @institutions = Institution.all
+    @q = Institution.ransack(params[:q])
+    @pagy, @institutions = pagy(@q.result)
   end
 
   # GET /institutions/1 or /institutions/1.json

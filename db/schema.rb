@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_13_155204) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_15_093948) do
   create_table "bookings", charset: "utf8mb3", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
+    t.text "notes"
     t.string "status"
     t.datetime "time"
     t.string "address"

@@ -1,33 +1,12 @@
-<% content_for :title, "Showing booking" %>
-
-<div class="md:w-2/3 w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <h1 class="font-bold text-4xl">Showing booking</h1>
-
-  <%= render @booking %>
-
-  <% content_for :sidebar do %>
-    <%= side_action_panel(actions: [
-      {
-        path: edit_booking_path(@booking),
-        label: "Edit Booking",
-        class: "text-blue-500 hover:text-blue-700"
-      },
-      {
-        path: booking_path(@booking),
-        method: :delete,
-        data: { confirm: "Are you sure?" },
-        label: "Delete Booking",
-        class: "text-red-500 hover:text-red-700"
-      },
-      {
-        path: dashboard_path,
-        label: "Back to Bookings",
-        class: "text-blue-500 hover:text-blue-700"
-      }
-    ]) %>
-  <% end %>
-</div>
+<%= render "shared/show_layout", 
+      resource: @booking, 
+      fields: [
+        ["Notes", @booking.notes],
+        ["Status", @booking.status],
+        ["Time", l(@booking.time, format: :long)],
+        ["Address", @booking.address],
+        ["Services", @booking.services.map { |s| "#{s.name} (#{number_to_currency(s.price)})" }.join(", ").html_safe]
+      ],
+      back_path: bookings_path,
+      edit_path: edit_booking_path(@booking),
+      delete_path: booking_path(@booking) %>

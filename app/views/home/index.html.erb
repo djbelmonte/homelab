@@ -1,12 +1,11 @@
-<div class="min-h-screen bg-gray-100 flex items-center justify-center">
-  <div class="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-    <h1 class="text-2xl font-bold mb-4 text-center">Welcome to Homelab</h1>
-    <p class="mb-6 text-gray-600 text-center">Slogan Here</p>
+<div class="min-h-screen bg-white flex items-center justify-center px-4">
+  <div class="bg-blue-50 shadow-lg rounded-2xl p-8 sm:p-10 max-w-md w-full border border-blue-100">
+    <h1 class="text-3xl font-extrabold text-blue-900 mb-4 text-center">Welcome to Homelab</h1>
+    <p class="mb-6 text-gray-600 text-center text-sm sm:text-base">Your trusted partner in diagnostics and medical services.</p>
 
     <div class="flex flex-col gap-4">
-      <%= link_to "Sign Up", new_user_registration_path, class: "w-full text-center py-2 px-4 border border-blue-500 text-blue-500 rounded hover:bg-blue-50" %>
-      <%= link_to "Log In", new_user_session_path, class: "w-full text-center py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+      <%= link_to "Sign Up", new_user_registration_path, class: "w-full text-center py-2 px-4 border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-100 transition" %>
+      <%= link_to "Log In", new_user_session_path, class: "w-full text-center py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition" %>
     </div>
-
-    <button class="btn btn-primary tes">DaisyUI Button</button>
+  </div>
 </div>

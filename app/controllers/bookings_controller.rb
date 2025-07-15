@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
 
   # POST /bookings or /bookings.json
   def create
-    @booking = Booking.new(booking_params.merge({status: "pending"}))
+    @booking = Booking.new(booking_params.merge({status: "pending", user_id: current_user.id}))
 
     respond_to do |format|
       if @booking.save
@@ -66,6 +66,6 @@ class BookingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def booking_params
-      params.require(:booking).permit(:title, :description, :status, :time, :address, :user_id)
+      params.require(:booking).permit(:notes, :status, :time, :address, service_ids: [])
     end
 end
