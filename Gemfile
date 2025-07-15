@@ -8,8 +8,6 @@ gem "propshaft"
 gem "mysql2", "~> 0.5"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
@@ -65,3 +63,4 @@ end
 gem "tailwindcss-rails", "~> 4.3"
 
 gem "devise", "~> 4.9"
+gem 'jsbundling-rails'
